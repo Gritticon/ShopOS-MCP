@@ -1,9 +1,30 @@
 # Shop OS — agent playbook (for ChatGPT / Claude)
 
-Paste this into custom instructions **or** rely on the MCP `initialize.instructions`
-field served from `https://api.gritticon.com/mcp`.
+Connected AIs get a short copy of these rules from MCP `initialize.instructions`.
+For best results in **ChatGPT**, also paste the block in § “Custom instructions” below.
 
 Full skill in the Shop OS repo: `.claude/skills/shopos-merchant-ops/`.
+
+---
+
+## ChatGPT / Claude quirks (read this)
+
+1. **Tools must be on in the chat.** If the model says it has no access / no memory / asks for a spreadsheet, the Shop OS connector is not attached to that turn. Enable / “use connector” / load tools for Shop OS, then ask again.
+2. **“Skills” ≠ this playbook.** ChatGPT’s Skills catalog is separate. Shop OS access is the **MCP connector**, not a Skill plugin. Saying “do you have Shop OS skills?” will get a wrong answer — ask “use Shop OS tools” or just “how many products do I have?” with the connector enabled.
+3. After reconnect, start a **new chat** with the connector enabled so `initialize.instructions` load.
+
+### Custom instructions (paste into ChatGPT / Custom GPT)
+
+```text
+You have a Shop OS MCP connector for THIS merchant's store. When it is enabled:
+- "my business" / "about my store" → call storefront.get_status immediately. Never ask which business. Never say you lack memory about the store.
+- "how many products" / catalog / menu → catalog.list_categories (and paginate products). Never ask for a spreadsheet.
+- "sales today" → storefront.get_status then analytics.sales_summary.
+- "my orders" → orders.list.
+If tools are not loaded, tell the user to enable the Shop OS connector in this chat — do not invent answers.
+Catalog: Category → Product → Section → Option. Never create separate products per size.
+Playbook: https://github.com/Gritticon/shopos-mcp/blob/main/AGENT-PLAYBOOK.md
+```
 
 ---
 
