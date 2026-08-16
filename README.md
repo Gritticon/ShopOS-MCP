@@ -1,52 +1,102 @@
-# Shop OS MCP — connect your AI assistant
+# Shop OS MCP
 
-Use Shop OS from **ChatGPT**, **Claude**, or **Gemini** (where available).  
-You never copy a token. You paste a **connector URL** and click **Allow**.
+Connect **ChatGPT**, **Claude**, or **Cursor** to your Shop OS store.
+
+This public repo is the **install package** merchants share.  
+The live connector runs at:
+
+```text
+https://api.gritticon.com/mcp
+```
+
+You never copy a token. After you add the connector, Shop OS opens an **Allow** screen (OAuth).
+
+---
+
+## Install from this GitHub repo
+
+### Option A — ChatGPT / Claude (custom connector)
+
+1. Open this repo: [Gritticon/ShopOS-MCP](https://github.com/Gritticon/ShopOS-MCP)
+2. Copy the connector URL from [`mcp.json`](./mcp.json) → `url`  
+   (**`https://api.gritticon.com/mcp`**)
+3. In ChatGPT or Claude: **Settings → Connectors / Connected apps → Add custom connector**
+4. Paste that URL
+5. Sign in to Shop OS if asked → click **Allow**
+6. Ask: “List my catalog” or “Show today’s orders”
+
+### Option B — Cursor / Claude Code (config file)
+
+Copy [`mcp.json`](./mcp.json) into your project as `.mcp.json` (or merge into your existing MCP config):
+
+```json
+{
+  "mcpServers": {
+    "shop-os": {
+      "type": "http",
+      "url": "https://api.gritticon.com/mcp"
+    }
+  }
+}
+```
+
+Or with Claude Code:
+
+```bash
+claude mcp add --transport http shop-os https://api.gritticon.com/mcp
+```
+
+On first tool use the client should open Shop OS OAuth (**Allow**).
+
+### Option C — Share only the repo link
+
+Send merchants:
+
+```text
+https://github.com/Gritticon/ShopOS-MCP
+```
+
+They follow **Option A** or **B** above. The repo always documents the current connector URL.
+
+---
 
 ## What you need
 
-- A Shop OS merchant account
-- The MCP connector URL from Shop OS (HTTPS) — shown in **Settings → AI connector** after setup, or given by your operator
-- ChatGPT or Claude with custom connectors enabled
-
-## ChatGPT
-
-1. Open **Settings → Connected apps** (or **Custom connectors**)
-2. Add a connector and paste your Shop OS MCP URL
-3. When redirected to Shop OS, sign in if asked and click **Allow**
-4. Ask the assistant something like: “List my catalog” or “Show today’s orders”
-
-## Claude
-
-1. Add a **custom connector** with the same MCP URL
-2. Complete **Allow** on Shop OS when prompted
-3. Start a chat and manage catalog / orders through the assistant
-
-### Claude Desktop / IDE only
-
-Hosted custom connectors are the merchant path. For local Desktop/IDE experiments, community `mcp-remote` bridges exist — that is not required for normal Shop OS merchants.
-
-## Gemini
-
-Custom connectors may be limited by region. If you do not see an option to add a custom app, use ChatGPT or Claude for now.
+- A Shop OS merchant account  
+- ChatGPT / Claude with custom connectors, **or** Cursor / Claude Code with MCP enabled
 
 ## After you connect
 
-In the Shop OS merchant app:
+In the Shop OS merchant app ([shopos.gritticon.com](https://shopos.gritticon.com)):
 
-- **Settings → AI connector** — see connected apps, revoke one connection, or **Disable all AI access**
-- **Activity** — every change the assistant makes, with a diff and **Undo**
+- **Settings → AI connector** — connected apps, revoke one, or **Disable all AI access**
+- **Activity** — every assistant change, with a diff and **Undo**
 
 ## What the assistant can do
 
-With the scopes you approve at connect time (defaults are read/write catalog, read orders, read analytics):
+With scopes you approve (defaults: catalog read/write, orders read, analytics read):
 
-- Browse and update products and categories
-- Check orders and storefront status
-- Propose bulk or price changes — you confirm before they apply
+- Browse and update products and categories  
+- Check orders and storefront status  
+- Propose bulk or price changes — you confirm before they apply  
 
-Shop OS **never** lets the connector manage payouts, delete your account, or see your login password.
+Shop OS **never** grants payouts, account deletion, or login credentials to the connector.
+
+## Gemini
+
+Custom connectors may be limited by region. If unavailable, use ChatGPT or Claude.
 
 ## Support
 
-If Allow fails or tools error, check **Settings → AI connector** and revoke/reconnect. Contact your Shop OS operator with the time of the failure.
+If Allow fails: **Settings → AI connector** → revoke → reconnect.  
+Operator contact: your Shop OS admin.
+
+## Repo layout
+
+| File | Purpose |
+|---|---|
+| [`mcp.json`](./mcp.json) | Canonical connector URL for clients |
+| [`cursor-mcp.example.json`](./cursor-mcp.example.json) | Cursor-shaped example |
+| [`LICENSE`](./LICENSE) | Docs license — **no server source** here |
+
+Server source is private (`shop-os-mcp-ecs`). This repo is documentation + install manifests only.

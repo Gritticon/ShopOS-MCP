@@ -1,0 +1,8 @@
+{
+  "name": "shop-os",
+  "description": "Shop OS merchant connector — catalog, orders, analytics via OAuth",
+  "type": "http",
+  "url": "https://api.gritticon.com/mcp",
+  "homepage": "https://github.com/Gritticon/ShopOS-MCP",
+  "docs": "https://github.com/Gritticon/ShopOS-MCP#readme"
+}

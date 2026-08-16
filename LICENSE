@@ -1,4 +1,7 @@
 Copyright (c) Gritticon
 
-Permission is granted to use this documentation to connect Shop OS to supported
-AI platforms. This repository does not include the Shop OS MCP server source code.
+Permission is granted to use this documentation and install manifests to connect
+Shop OS to supported AI platforms.
+
+This repository does not include the Shop OS MCP server source code.
+The live connector endpoint is https://api.gritticon.com/mcp

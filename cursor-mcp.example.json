@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "shop-os": {
+      "type": "http",
+      "url": "https://api.gritticon.com/mcp"
+    }
+  }
+}
