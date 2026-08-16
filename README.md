@@ -97,6 +97,7 @@ Operator contact: your Shop OS admin.
 |---|---|
 | [`mcp.json`](./mcp.json) | Canonical connector URL for clients |
 | [`cursor-mcp.example.json`](./cursor-mcp.example.json) | Cursor-shaped example |
+| [`AGENT-PLAYBOOK.md`](./AGENT-PLAYBOOK.md) | How connected AIs should run the store (menu model + UI paths) |
 | [`LICENSE`](./LICENSE) | Docs license — **no server source** here |
 
 Server source is private (`shop-os-mcp-ecs`). This repo is documentation + install manifests only.
