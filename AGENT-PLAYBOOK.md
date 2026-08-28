@@ -52,6 +52,10 @@ Category → Product → Section → Option
 **Tool reality today**
 
 - `catalog.create_product` and import create **flat** products only.
+- Product `description` is plaintext with newlines, **or** this HTML only:
+  `<p class="ta-left|ta-center|ta-right ts-sm|ts-md|ts-lg">` with optional
+  `<strong>`, `<em>`, `<br>`. Not markdown. Other tags stripped on save.
+  Example: `<p class="ta-center ts-lg"><strong>Chef special</strong></p>`
 - After creating the base item, guide the merchant to **Catalog → product** to add sections/options and upload photos.
 - `images` on tools = **hosted URL list only** (no MCP file upload).
 
